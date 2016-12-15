@@ -1,9 +1,9 @@
 <div class="leftnav">
     <!--    <div class="leftnav-title"><strong><span class="icon-list"></span>系统首页</strong></div>-->
-    <h2><a class="left_nav" name="/index.php?r=home/test" href="#"><span class="icon-pencil-square-o" ></span>系统首页</a></h2>
-    <h2><a  class="left_nav" name="/index.php?r=home/test" href="#"><span class="icon-pencil-square-o"></span>mysql管理</a></h2>
+    <h2><a class="left_nav" name="/index.php?r=home/index" href="#"><span class="icon-pencil-square-o" ></span>系统首页</a></h2>
+    <h2><a  class="left_nav" name="/index.php?r=mysql/index" href="#"><span class="icon-pencil-square-o"></span>mysql管理</a></h2>
 
-    <h2><a  class="left_nav" name="/index.php?r=home/test" href="#"><span class="icon-pencil-square-o"></span>redis管理</a></h2>
+    <h2><a  class="left_nav" name="/index.php?r=redis/index" href="#"><span class="icon-pencil-square-o"></span>redis管理</a></h2>
 
     <h2><a  class="left_nav" name="/index.php?r=home/test" href="#"><span class="icon-pencil-square-o"></span>mongodb管理</a></h2>
     <h2><a  class="left_nav" name="/index.php?r=home/test" href="#"><span class="icon-pencil-square-o"></span>用户管理</a></h2>
