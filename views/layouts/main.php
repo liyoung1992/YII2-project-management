@@ -22,7 +22,8 @@ AppAsset::register($this);
     <title>数据管理中心</title>
     <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
-    <script src="js/jquery.js"></script>
+<!--    <script src="js/jquery.js"></script>-->
+    <script src="js/jquery-1.9.1.min.js"></script>
 </head>
 <body  style="background-color:#f2f9fd;">
 <?php $this->beginBody() ?>
