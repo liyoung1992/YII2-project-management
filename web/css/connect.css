@@ -19,7 +19,15 @@
 .ztree li span.button.noline_open.level0 {background-position: 0 -18px;}
 .ztree li span.button.noline_close.level0 {background-position: -18px -18px;}
 div.zTreeDemoBackground {width:250px;height:auto;text-align:left;float: left}
-.table_data{
-    /*margin-left: 260px;*/
-    float: left;
-}
+
+.table_data{ float: left; }
+.table_data table{ width: 92%; font-size: 14px; }
+.table_data table th,.record_text_table table td{ height: 30px; border: 1px solid #e2e2e2; text-align: center; }
+.table_data table th{ background: #ececec; font-weight: bold; font-size: 14px; }
+.table_data table td{ background-color: #f6f6f6; font-size: 12px; }
+.table_data table td.colbur{ color: #39a3e6; }
+.table_data table tr:hover td.colbur{ color: #0063b7; }
+.table_data table td a{ border-radius: 5px; padding: 1px 15px; color: #fff; }
+.table_data table td a:hover,.record_text_table table td a:focus{ text-decoration: none; }
+.table_data table td .listen{ background-color: #39a3e6; }
+.table_data table td .download{ background-color: #999966; }

@@ -58,25 +58,44 @@ class MysqlController extends Controller
             } else {
                 echo "没有查询到结果！！！";
             }
+            $conn->close();
             $data = $this->generateTreeData($paras['dbName'],$table_list);
             return $this->renderPartial("connect",[
                 'data' => $data,
+                'key' => $_GET['key'],
             ]);
         }
     }
 
     public function actionFind(){
-        if(!empty($_POST['table'])){
-            $sql = "select * from {$_POST['table']}";
-            $count = Yii::$app->db->createCommand("SELECT COUNT(*) FROM {$_POST['table']}")->queryScalar();
-            $provider = new SqlDataProvider([
-                'sql' => $sql,
-                'params' => [':status' => 1],
-                'totalCount' => $count,
-                'pagination' => [
-                    'pageSize' => 10,
-                ],
-            ]);
+        if(!empty($_POST)){
+//            $paras = $_POST['key'];
+            $paras = Yii::$app->session->get($_POST['key']);
+            $conn = new \mysqli($paras['serverName'], $paras['userName'], $paras['password'], $paras['dbName']);
+            if ($conn->connect_error) {
+                die("连接失败: " . $conn->connect_error);
+            }
+            $table_data = $conn->query("select * from {$_POST['table']}");
+            $data = array();
+            if ($table_data->num_rows > 0) {
+                while ($row = $table_data->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            } else {
+                echo "没有查询到结果！！！";
+            }
+            $result = array();
+            $keys = array();
+            if(!empty($data[0])){
+                foreach ($data[0] as $key => $item) {
+                    $keys[] = $key;
+                }
+            }
+            $result['key'] = $keys;
+            $result['data'] = $data;
+            return json_encode($result);
+        }else{
+            return "";
         }
     }
     public function generateTreeData($parent,$data){
@@ -84,6 +103,7 @@ class MysqlController extends Controller
         $table['id'] = 1;
         $table['pId'] = -1;
         $table['name'] = $parent;
+        $table['open'] = true;
         $ztree[] = $table;
         if(!empty($data)){
             foreach ($data as $item) {
