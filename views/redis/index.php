@@ -27,7 +27,7 @@ use yii\grid\GridView;
         <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
         <div class="padding border-bottom">
             <ul class="search" style="padding-left:10px;">
-                <li> <a class="button border-main icon-plus-square-o" href="add.html"> 添加数据库</a> </li>
+                <li> <a class="button border-main icon-plus-square-o" href="#"> 添加数据库</a> </li>
                 <li>
                     <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input" style="width:250px; line-height:17px;display:inline-block" />
                     <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
@@ -49,8 +49,8 @@ use yii\grid\GridView;
                     'buttons' => [
                         'connect' => function ($url, $model, $key) {
 
-                            return  Html::a('<span class="glyphicon glyphicon-user">连接到数据库</span>',
-                                "javascript:connect('$model->serverName','$model->port');",
+                            return  Html::a('<span class="glyphicon glyphicon-user">连接到redis</span>',
+                                "javascript:connect('$model->id','$model->serverName','$model->port','$model->db');",
                                 ['title' => "连接到数据库",'data-pjax'=>'0'] ) ;
                         },
 //                        'update' => function ($url, $model, $key) {
@@ -68,13 +68,15 @@ use yii\grid\GridView;
 <script src="js/jquery-1.9.1.min.js"></script>
 <script src="js/pintuer.js"></script>
 <script type="text/javascript">
-    function connect(serverName,Port){
+    function connect(id,serverName,Port,db){
         $.ajax({
             type:"POST",
             url:"/index.php?r=redis/connect",
             data:{
+                'id':id,
                 "serverName":serverName,
                 "port":Port,
+                'db':db,
             },
             dataType:'html',
             contentType:'application/x-www-form-urlencoded',

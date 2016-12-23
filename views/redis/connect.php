@@ -3,7 +3,7 @@
 <HEAD>
     <TITLE> ZTREE DEMO - left_menu for Outlook</TITLE>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!--    <link rel="stylesheet" href="js/zTree/css/demo.css" type="text/css">-->
+    <!--    <link rel="stylesheet" href="js/zTree/css/demo.css" type="text/css">-->
     <link rel="stylesheet" href="js/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
     <link rel="stylesheet" href="css/connect.css" type="text/css">
 
@@ -13,10 +13,10 @@
 
     </div>
     <div class="table_data">
-           <h2 class="table_title">在这里显示数据库表的数据</h2>
-         <table id="select_data" class="select_table_css">
+        <h2 class="table_title">在这里显示redis的数据</h2>
+        <table id="select_data" class="select_table_css">
 
-         </table>
+        </table>
     </div>
 
 
@@ -86,44 +86,44 @@
                 treeObj.removeClass("showIcon");
             });
         });
-       function select_from_table(table,key){
-           $.ajax({
-               type:"POST",
-               url:"/index.php?r=redis/find",
-               data:{
-                   "table":table,
-                   "key":key,
-               },
-               dataType:'html',
-               contentType:'application/x-www-form-urlencoded',
-               async:false,
-               success:function(data){
-                    $(".table_title").html(table + "表的所有数据");
-                   var result = eval("("+data+")");
-                   $("#select_data").empty();
-                   var  header = "";
-                   var body = "";
-                   for(var i = 0; i < result['key'].length; i++){
-                       var h = "<th>"+ result['key'][i]+"</th>"
-                      header = header + h;
-                   }
-                   header = "<tr>" + header + "</tr>";
-                   for(var i = 0; i < result['data'].length; i++){
-                       var b = "<tr>"
-                       for(var j = 0; j < result['key'].length; j++){
-                           b = b + "<td>"+result['data'][i][result['key'][j]] +"</td>";
-                       }
-                       b = b + "</tr>";
-                       body = body + b;
-                   }
+        function select_from_table(table,key){
+            $.ajax({
+                type:"POST",
+                url:"/index.php?r=redis/find",
+                data:{
+                    "redis_key":table,
+                    "key":key,
+                },
+                dataType:'html',
+                contentType:'application/x-www-form-urlencoded',
+                async:false,
+                success:function(data){
+                    $(".table_title").html(table + "键的所有数据");
+                    var result = eval("("+data+")");
+                    $("#select_data").empty();
+                    var  header = "";
+                    var body = "";
+                    for(var i = 0; i < result['key'].length; i++){
+                        var h = "<th>"+ result['key'][i]+"</th>"
+                        header = header + h;
+                    }
+                    header = "<tr>" + header + "</tr>";
+                    for(var i = 0; i < result['data'].length; i++){
+                        var b = "<tr>"
+                        for(var j = 0; j < result['key'].length; j++){
+                            b = b + "<td>"+result['data'][i][result['key'][j]] +"</td>";
+                        }
+                        b = b + "</tr>";
+                        body = body + b;
+                    }
 
-                   $("#select_data").append(header + body);
-                   return false;
-               },
-               error:function(XMLHttpRequest, textStatus, errorThrown) {
-                   alert('读取超时，请检查网络连接');
-                   return false;
-               },
-           });
-       }
+                    $("#select_data").append(header + body);
+                    return false;
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert('读取超时，请检查网络连接');
+                    return false;
+                },
+            });
+        }
     </SCRIPT>
